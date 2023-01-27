@@ -3,9 +3,7 @@ package com.alexandertutoriales.ecommerce.service.service;
 import com.alexandertutoriales.ecommerce.service.entity.Usuario;
 import com.alexandertutoriales.ecommerce.service.repository.UsuarioRepository;
 import com.alexandertutoriales.ecommerce.service.utlis.GenericResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import sun.util.locale.provider.HostLocaleProviderAdapter;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -14,7 +12,6 @@ import static com.alexandertutoriales.ecommerce.service.utlis.Global.*;
 
 @Service
 @Transactional
-@Slf4j
 public class UsuarioService {
     private final UsuarioRepository repository;
 
@@ -26,15 +23,15 @@ public class UsuarioService {
         Optional<Usuario> optU = this.repository.login(email, contrasenia);
 
         if(optU.isPresent()){
-            log.info("Inicio sesion correctamente");
-            log.info("Usuario:" + email);
-            log.info("contraseña:" + contrasenia);
+            System.out.println("Inicio sesion correctamente");
+            System.out.println("Usuario:" + email);
+            System.out.println("contraseña:" + contrasenia);
             return new GenericResponse<Usuario>(TIPO_AUTH, RPTA_OK, "Haz iniciado sesión correctamente", optU.get());
 
         }else{
-            log.info("Revise su usuario y contraseña");
-            log.info("Usuario:" + email);
-            log.info("contraseña:" + contrasenia);
+            System.out.println("Revise su usuario y contraseña");
+            System.out.println("Usuario:" + email);
+            System.out.println("contraseña:" + contrasenia);
             return new GenericResponse<Usuario>(TIPO_AUTH, RPTA_WARNING, "Lo sentimos, ese usuario no existe", new Usuario());
         }
     }
