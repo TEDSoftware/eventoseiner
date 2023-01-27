@@ -21,17 +21,9 @@ public class UsuarioService {
     //Método para iniciar sesión
     public GenericResponse<Usuario> login(String email, String contrasenia){
         Optional<Usuario> optU = this.repository.login(email, contrasenia);
-
         if(optU.isPresent()){
-            System.out.println("Inicio sesion correctamente");
-            System.out.println("Usuario:" + email);
-            System.out.println("contraseña:" + contrasenia);
             return new GenericResponse<Usuario>(TIPO_AUTH, RPTA_OK, "Haz iniciado sesión correctamente", optU.get());
-
         }else{
-            System.out.println("Revise su usuario y contraseña");
-            System.out.println("Usuario:" + email);
-            System.out.println("contraseña:" + contrasenia);
             return new GenericResponse<Usuario>(TIPO_AUTH, RPTA_WARNING, "Lo sentimos, ese usuario no existe", new Usuario());
         }
     }
